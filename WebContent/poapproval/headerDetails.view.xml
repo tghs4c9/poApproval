@@ -1,0 +1,25 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="poapproval.headerDetails" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Purchase Orders">
+		<content>
+			<Toolbar>
+			<SearchField  liveChange = "hitSearch" class="sapUiSmallMargin" />
+		</Toolbar>
+		<List
+		id="idList"
+		
+		items="{/results}"
+		itemPress = "itemPress"  >
+		<items>
+			<ObjectListItem
+			    type = "Navigation"
+				title="{PONumber}"
+				intro="{CreatedBy}"
+				number = "{ExchangeRate}"
+				numberUnit = "{Currency}"
+				/>
+		</items>
+	</List>
+		</content>
+	</Page>
+</core:View>

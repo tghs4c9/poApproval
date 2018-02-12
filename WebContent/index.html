@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+
+		<script src="resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m"
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+		<!-- only load the mobile lib "sap.m" and the "sap_bluecrystal" theme -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+		sap.ui.localResources("poapproval");
+		var page1 = sap.ui.view({id:"idHeaderDetails1", viewName:"poapproval.headerDetails", type:sap.ui.core.mvc.ViewType.XML});
+		var page2 = sap.ui.view({id:"idItemDetails1", viewName:"poapproval.itemDetails", type:sap.ui.core.mvc.ViewType.XML});
+		var page3 = sap.ui.view({id:"idZero",viewName:"poapproval.zeroView",type:sap.ui.core.mvc.ViewType.XML});		
+				var app = new sap.m.SplitApp("idApp",{
+					initialMasterPage:"idHeaderDetails1",
+					initialDetailPage:"idZero",
+					masterPages : [page1],
+					detailPages:[page3,page2]
+					});
+				
+				/* app.addPage(page1);
+				app.addPage(page2); */
+				app.placeAt("content");
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>
