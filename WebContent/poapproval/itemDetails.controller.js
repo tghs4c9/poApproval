@@ -1,4 +1,15 @@
-sap.ui.controller("poapproval.itemDetails", {
+sap.ui
+		.define(
+				[ "sap/ui/core/mvc/Controller", "sap/m/MessageBox",
+						"sap/m/MessageToast" ],
+				function(Controller, MessageBox, MessageToast) {
+
+					return Controller
+							.extend(
+									"poapproval.itemDetails",
+									{
+
+//sap.ui.controller("poapproval.itemDetails", {
 
 /**
 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -21,6 +32,44 @@ console.log(oJsonModel);*/
 		
 	},
 
+	approve: function(){
+		 //jQuery.sap.require("sap.m.MessageBox");
+		var sServiceUrlApprove = "proxy/http/122.165.148.177:8000/sap/opu/odata/sap/ZPO_FINAL_SRV"
+			var user = "sapdev";
+			var pass = "admin@123";
+			var oModelApprove = new sap.ui.model.odata.ODataModel(sServiceUrlApprove, true,user, pass);
+			var oJsonModelApprove = new sap.ui.model.json.JSONModel(oModelApprove);
+			// var a = this;
+			
+			var oEntry = {};
+			oEntry.PONumber = "4500018256";
+			oEntry.CreatedBy = "SHIVGIRI";
+			
+         
+			MessageBox
+					.confirm(
+							"Are you Sure To Release The PO??",
+							{
+								onClose : function(
+										selection) {
+									if (selection == "OK") {
+										var surya = 4500018256;
+										//debugger
+										oModelApprove
+												.update(
+														"/PurchaseOrderHeaderCollection('" + surya + "')",
+														oEntry,
+														null,
+														function(
+																oData,
+																response) {
+															MessageBox
+																	.success("Your PO Has been Released");
+														});
+									}
+								}
+							})
+	}
 	
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -49,3 +98,4 @@ console.log(oJsonModel);*/
 //	}
 
 });
+				})

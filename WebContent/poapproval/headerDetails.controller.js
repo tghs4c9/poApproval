@@ -48,7 +48,7 @@ console.log(oJsonModel);
 		oList.getBinding("items").filter(aFilter);*/
 	},
 	itemPress: function(oEvent){
-		debugger
+		
 		var path = oEvent.getParameter("listItem").getBindingContextPath();
 		var po = oEvent.getParameter("listItem").getProperty("title");
 		console.log(po);
