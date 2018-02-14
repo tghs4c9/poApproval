@@ -40,12 +40,12 @@ console.log(oJsonModel);*/
 			var oModelApprove = new sap.ui.model.odata.ODataModel(sServiceUrlApprove, true,user, pass);
 			var oJsonModelApprove = new sap.ui.model.json.JSONModel(oModelApprove);
 			// var a = this;
-			
+			debugger
 			var oEntry = {};
 			oEntry.PONumber = "4500018256";
 			oEntry.CreatedBy = "SHIVGIRI";
-			
-         
+			//var oPO = sap.ui.getModel("items").getProperty("/");
+          var a = this;
 			MessageBox
 					.confirm(
 							"Are you Sure To Release The PO??",
@@ -53,8 +53,8 @@ console.log(oJsonModel);*/
 								onClose : function(
 										selection) {
 									if (selection == "OK") {
-										var surya = 4500018256;
-										//debugger
+										var surya = a.getView().byId("po").getValue();
+										debugger
 										oModelApprove
 												.update(
 														"/PurchaseOrderHeaderCollection('" + surya + "')",

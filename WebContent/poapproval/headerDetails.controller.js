@@ -28,7 +28,7 @@ sap.ui.controller("poapproval.headerDetails", {
 									.setData(oData);
 						});
 console.log(oJsonModel);
-		this.getView().setModel(oJsonModel);
+		sap.ui.getCore().setModel(oJsonModel,"header");
 	},
 
 	hitSearch : function(oEvent){
@@ -48,8 +48,8 @@ console.log(oJsonModel);
 		oList.getBinding("items").filter(aFilter);*/
 	},
 	itemPress: function(oEvent){
-		
-		var path = oEvent.getParameter("listItem").getBindingContextPath();
+		debugger
+		//var path = oEvent.getParameter("listItem").getBindingContextPath();
 		var po = oEvent.getParameter("listItem").getProperty("title");
 		console.log(po);
 		/*var extra = "/PurchaseOrderItem/results/";
@@ -57,13 +57,19 @@ console.log(oJsonModel);
 		/*var extra = path.getProperty("POItem");
 		console.log(extra);*/
 		var oApp = sap.ui.getCore().byId("idApp");
-		var oView2 = sap.ui.getCore().byId("idItemDetails1");
-		oView2.bindElement(path);
+		/*var oView2 = sap.ui.getCore().byId("idItemDetails1");
+		oView2.bindElement(path);*/
 		//this.getView().getModel()
 		var sServiceUrlPo = "proxy/http/122.165.148.177:8000/sap/opu/odata/sap/ZPO_FINAL_SRV";
 		var user = "sapdev";
 		var pass = "admin@123";
 
+		var oPo = new sap.ui.model.json.JSONModel();
+		oPo.setData({
+			po : po
+		});
+
+		sap.ui.getCore().setModel(oPo,"po");
         
 		var oModelPo = new sap.ui.model.odata.ODataModel(sServiceUrlPo, true, user,	pass);
 		var oJsonModel = new sap.ui.model.json.JSONModel(oModelPo);

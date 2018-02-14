@@ -5,7 +5,25 @@
 		
 		<content>
 	
-	<Input id ="po" type="number" value = "{PONumber}" ></Input>
+	<ObjectHeader 
+    			    id="header" title="{SupplierName}" responsive="true"
+					number="{parts: [ {path: 'GrossAmount'}, {path: 'CurrencyCode'}],
+                        type : 'sap.ui.model.type.Currency',
+                        formatOptions: { showMeasure: false }}" 
+    			    numberUnit="{CurrencyCode}"
+    			    intro="{parts:[{path: 'i18n>xfld.orderedBy'}, {path: 'OrderedByName'}], formatter: 'jQuery.sap.formatMessage'}">
+    			    <statuses>
+    				    <ObjectStatus id="status" 
+    				    	text="{path: 'ChangedAt', type: 'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium',
+													strictParsing: true,
+													relative: true }}" 
+    				    	title="{/#PurchaseOrder/ChangedAt/@sap:label}"
+    				    />
+    			    </statuses>
+    		    </ObjectHeader>
+	
+	<Input id ="po" type="number" value = "{po>/po}" ></Input>
 	
 	<List
 		id="idList"

@@ -8,15 +8,15 @@
 		<List
 		id="idList"
 		
-		items="{/results}"
+		items="{header>/results}"
 		itemPress = "itemPress"  >
 		<items>
 			<ObjectListItem
 			    type = "Navigation"
-				title="{PONumber}"
-				intro="{CreatedBy}"
-				number = "{ExchangeRate}"
-				numberUnit = "{Currency}"
+				title="{header>PONumber}"
+				intro="{header>CreatedBy}"
+				number = "{header>ExchangeRate}"
+				numberUnit = "{header>Currency}"
 				/>
 		</items>
 	</List>
