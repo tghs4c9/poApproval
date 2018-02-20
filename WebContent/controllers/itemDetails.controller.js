@@ -6,7 +6,7 @@ sap.ui
 
 					return Controller
 							.extend(
-									"poapproval.itemDetails",
+									"itpcl.mm.approvepo.controllers.itemDetails",
 									{
 
 //sap.ui.controller("poapproval.itemDetails", {
@@ -28,10 +28,16 @@ sap.ui
 		});
 		this.getView().setModel(oJsonModel1);
 console.log(oJsonModel);*/
-
+                           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                           oRouter.attachRoutePatternMatched(this.Rio,this);
 		
 	},
 
+	Rio:function(oEvent){
+		
+		var preparePath = "/results(" + oEvent.getParameter("arguments").surya+")";
+		this.getView().bindElement(preparePath);
+	},
 	approve: function(){
 		 //jQuery.sap.require("sap.m.MessageBox");
 		var sServiceUrlApprove = "proxy/http/122.165.148.177:8000/sap/opu/odata/sap/ZPO_FINAL_SRV"

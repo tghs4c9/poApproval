@@ -1,4 +1,4 @@
-sap.ui.controller("poapproval.headerDetails", {
+sap.ui.controller("itpcl.mm.approvepo.controllers.headerDetails", {
 
 /**
 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -7,28 +7,7 @@ sap.ui.controller("poapproval.headerDetails", {
 */
 	onInit: function() {
 		//hello world
-		var sServiceUrlPo = "proxy/http/122.165.148.177:8000/sap/opu/odata/sap/ZPO_FINAL_SRV";
-		var user = "sapdev";
-		var pass = "admin@123";
-
-		var oModelPo = new sap.ui.model.odata.ODataModel(
-				sServiceUrlPo, true, user,
-				pass);
-		var oJsonModel = new sap.ui.model.json.JSONModel(
-				oModelPo);
-		oModelPo
-				.read(
-						"/PurchaseOrderHeaderCollection",
-						null,
-						null,
-						true,
-						function(oData,
-								response) {
-							oJsonModel
-									.setData(oData);
-						});
-console.log(oJsonModel);
-		sap.ui.getCore().setModel(oJsonModel,"header");
+		this.Router = sap.ui.core.UIComponent.getRouterFor(this);
 	},
 
 	hitSearch : function(oEvent){
@@ -48,8 +27,8 @@ console.log(oJsonModel);
 		oList.getBinding("items").filter(aFilter);*/
 	},
 	itemPress: function(oEvent){
-		debugger
-		//var path = oEvent.getParameter("listItem").getBindingContextPath();
+		
+		var path = oEvent.getParameter("listItem").getBindingContextPath();
 		var po = oEvent.getParameter("listItem").getProperty("title");
 		console.log(po);
 		/*var extra = "/PurchaseOrderItem/results/";
@@ -60,9 +39,7 @@ console.log(oJsonModel);
 		/*var oView2 = sap.ui.getCore().byId("idItemDetails1");
 		oView2.bindElement(path);*/
 		//this.getView().getModel()
-		var sServiceUrlPo = "proxy/http/122.165.148.177:8000/sap/opu/odata/sap/ZPO_FINAL_SRV";
-		var user = "sapdev";
-		var pass = "admin@123";
+		
 
 		var oPo = new sap.ui.model.json.JSONModel();
 		oPo.setData({
@@ -70,19 +47,14 @@ console.log(oJsonModel);
 		});
 
 		sap.ui.getCore().setModel(oPo,"po");
-        
-		var oModelPo = new sap.ui.model.odata.ODataModel(sServiceUrlPo, true, user,	pass);
-		var oJsonModel = new sap.ui.model.json.JSONModel(oModelPo);
-		/*var surya = this.getView().byId("po").getValue();
-		var surya = surya;
-		console.log(surya)*/
-		oModelPo.read("/PurchaseOrderHeaderCollection('" + po + "')?$expand=PurchaseOrderItem",null,null,true,function(oData,response) {
-							oJsonModel.setData(oData);
-						});
-		sap.ui.getCore().setModel(oJsonModel,"items");
-		
-		oApp.to("idItemDetails1","flip");
-	}
+//		debugger		
+//		var oItems = sap.ui.getCore().byId("po");
+//		oItems.bindElement(path);
+
+		this.Router.navTo("itemDetails",{
+			surya : po
+		});	
+	},
 /* Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 * (NOT before the first rendering! onInit() is used for that one!).
 * @memberOf poapproval.headerDetails
@@ -96,9 +68,9 @@ console.log(oJsonModel);
 * This hook is the same one that SAPUI5 controls get after being rendered.
 * @memberOf poapproval.headerDetails
 */
-//	onAfterRendering: function() {
-//
-//	},
+	onAfterRendering: function() {
+		
+	},
 
 /**
 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
